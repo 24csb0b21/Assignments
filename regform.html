@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registration Form</title>
+    <style>
+        body {
+            background-color: pink;
+            text-align: center;
+        }
+        h1 {
+            text-align: center;
+        }
+        .b1 {
+            background-color: green;
+        }
+        .b2 {
+            background-color: red;
+        }
+        .b3 {
+            background-color: green;
+            color: white;
+        }
+        marquee {
+            border: blue 3px solid;
+        }
+        form {
+            display: inline-block;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1><u>REGISTRATION FORM</u></h1>
+    <hr>
+    <form name="registrationForm" onsubmit="return validateForm()">
+        <marquee direction="right">
+            <button class="b3">New</button>
+            This is a registration form for summer internship and should be filled with utmost care
+        </marquee><br>
+        
+        
+        <label><b>First Name:</b></label>
+        <input type="text" name="firstname"><br>
+        <br>
+        <label><b>Last Name:</b></label>
+        <input type="text" name="lastname"><br>
+        
+        <label><b>Select your gender:</b></label><br>
+        <input type="radio" name="gender" id="g1"><label for="g1">Male</label>
+        <input type="radio" name="gender" id="g2"><label for="g2">Female</label>
+        <input type="radio" name="gender" id="g3"><label for="g3">Other</label><br>
+        <br>
+        <label><b>Date of Birth:</b></label><br>
+        <label>Date:</label>
+        <select name="date">
+            <option value="1">1</option>
+            <option value="2">2</option>
+        </select>
+        <label>Month:</label>
+        <select name="month">
+            <option value="jan">January</option>
+            <option value="feb">February</option>
+        </select>
+        <label>Year:</label>
+        <select name="year">
+            <option value="2001">2001</option>
+            <option value="2002">2002</option>
+        </select><br>
+        <br>
+        <label><b>Select your age:</b></label><br>
+        <input type="radio" id="age1" name="age" value="15"><label for="age1">0 to 15</label>
+        <input type="radio" id="age2" name="age" value="16-30"><label for="age2">16 to 30</label><br>
+        <br>
+        <label><b>Local Address:</b></label>
+        <input type="text" name="localad"><br>
+        <br>
+        <label><b>Permanent Address:</b></label>
+        <input type="text" name="perAd"><br>
+        <br>
+        <label><b>Languages Known:</b></label>
+        <input type="text" name="languages"><br>
+        <br>
+        <label><b>State:</b></label>
+        <input type="text" name="state"><br>
+        <br>
+        <label><b>Pincode:</b></label>
+        <input type="text" name="pincode"><br>
+        <br>
+        <label><b>Country:</b></label>
+        <input type="text" name="country"><br>
+        <br>
+        <label><b>Interested Area:</b></label>
+        <select name="interest">
+            <option value="machine learning">Machine Learning</option>
+            <option value="deep learning">Deep Learning</option>
+        </select><br>
+        <br>
+        <label><b>Favourite Subject:</b></label><br>
+        <input type="checkbox" name="subject" value="Maths">Maths
+        <input type="checkbox" name="subject" value="Physics">Physics
+        <input type="checkbox" name="subject" value="Chemistry">Chemistry<br>
+        <br>
+        <label><b>Institute:</b></label>
+        <input type="text" name="institute"><br>
+        <br>
+        <label><b>CGPA:</b></label>
+        <input type="text" name="cgpa"><br>
+        <br>
+        <label><b>Contact No:</b></label>
+        <input type="number" name="mno"><br>
+        <br>
+        <label><b>Email ID:</b></label>
+        <input type="text" name="email"><br>
+        <br>
+        <button class="b1" type="submit">Submit</button>
+        <button class="b2" type="reset">Reset</button>
+    </form>
+</body>
+</html> 
