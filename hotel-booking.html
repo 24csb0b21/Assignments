@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hotel Booking</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        
+        h1 {
+            color: #333;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        
+        input[type="text"], input[type="email"], input[type="date"] {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        input[type="submit"]:active {
+            transform: scale(0.98);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        nav a {
+            margin: 10px;
+            text-decoration: none;
+            color: #007BFF;
+            font-size: 18px;
+            padding: 10px 15px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: #007BFF;
+            color: white;
+            transform: scale(1.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Animation for bounce effect */
+        .bounce {
+            animation: bounce 1s ease infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        /* Animation for shake effect */
+        .shake {
+            animation: shake 0.5s ease infinite;
+        }
+
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            50% { transform: translateX(5px); }
+            75% { transform: translateX(-5px); }
+            100% { transform: translateX(0); }
+        }
+
+        /* Animation for ripple effect */
+        .ripple {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .ripple:after {
+            content: "";
+            position: absolute;
+            width: 300%;
+            height: 300%;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            animation: ripple-effect 0.6s linear;
+            transform: scale(0);
+        }
+
+        @keyframes ripple-effect {
+            to {
+                transform: scale(1);
+                opacity: 0;
+            }
+        }
+        
+        /* Applying ripple to buttons */
+        input[type="submit"].ripple {
+            position: relative;
+            overflow: hidden;
+        }
+
+        input[type="submit"].ripple:active:after {
+            transform: scale(1);
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="bounce">Book Your Stay in Delhi</h1>
+    <form action="/submit-booking" method="post">
+        <p>Name: <input type="text" name="name"></p>
+        <p>Email: <input type="email" name="email"></p>
+        <p>Check-in Date: <input type="text" name="checkin" placeholder="Enter check-in date (e.g., 2025-01-26)"></p>
+        <p>Check-out Date: <input type="text" name="checkout" placeholder="Enter check-out date (e.g., 2025-01-30)"></p>
+        <p><input type="submit" value="Book Now" class="ripple"></p>
+    </form>
+    <nav>
+        <a href="index.html" class="shake">Home</a>
+        <a href="heritage.html" class="shake">Heritage</a>
+        <a href="hotel-booking.html" class="shake">Hotel Booking</a>
+        <a href="gallery.html" class="shake">Gallery</a>
+    </nav>
+</body>
+</html>

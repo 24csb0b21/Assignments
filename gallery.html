@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gallery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color:
+        }
+
+        h1 {
+            margin: 20px 0;
+            font-size: 2em;
+        }
+
+        nav {
+            margin-top: 20px;
+        }
+
+        nav a {
+            margin: 10px;
+            text-decoration: none;
+            color: blue;
+            position: relative;
+            font-size: 1.1em;
+            padding: 10px 20px;
+            border: 2px solid blue;
+            border-radius: 5px;
+            transition: color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* Hover effect with scale and color change */
+        nav a:hover {
+            color: darkblue;
+            transform: scale(1.1);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Ripple effect */
+        .ripple {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .ripple:after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.3);
+            transform: scale(0);
+            animation: ripple-animation 0.6s linear;
+        }
+
+        .ripple:hover:after {
+            animation: ripple-animation 0.6s linear;
+        }
+
+        @keyframes ripple-animation {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        /* Shake effect */
+        .shake {
+            animation: shake-animation 0.5s ease-in-out;
+        }
+
+        @keyframes shake-animation {
+            0% {
+                transform: translateX(0);
+            }
+            25% {
+                transform: translateX(-5px);
+            }
+            50% {
+                transform: translateX(5px);
+            }
+            75% {
+                transform: translateX(-5px);
+            }
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        nav a.shake:hover {
+            animation: shake-animation 1s ease-in-out;
+        }
+
+        /* Image hover effect */
+        img {
+            width: 50%;
+            height: 50%;
+            margin: 10px;
+            border-radius: 10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        img:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <h1>Gallery of Heritage Sites</h1>
+    <div class="ripple">
+        <img src="https://www.shutterstock.com/shutterstock/photos/1199337631/display_1500/stock-photo-red-fort-delhi-india-with-india-flag-flying-high-1199337631.jpg" alt="Heritage Site 1">
+    </div>
+    <div class="ripple">
+        <img src="https://images.pexels.com/photos/14105979/pexels-photo-14105979.jpeg" alt="Heritage Site 2">
+    </div>
+    <div class="ripple">
+        <img src="https://chardhambooking.com/wp-content/uploads/2021/01/Lotus-Tmple-Photo-by-Arpan-Das.jpg" alt="Heritage Site 3">
+    </div>
+<div class="ripple">
+        <img src="https://images.unsplash.com/photo-1587474260584-136574528ed5?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8aW5kaWElMjBnYXRlfGVufDB8fDB8fHww" alt="Heritage Site 4">
+    </div>
+    <nav>
+        <a href="index.html" class="ripple shake">Home</a>
+        <a href="heritage.html" class="ripple">Heritage</a>
+        <a href="hotel-booking.html" class="ripple">Hotel Booking</a>
+        <a href="gallery.html" class="ripple">Gallery</a>
+    </nav>
+</body>
+</html>
