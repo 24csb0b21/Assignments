@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #ecf0f1;
+        text-align: center;
+        padding: 20px;
+    }
+    .subscribe-form {
+        background: #f39c12;
+        padding: 20px;
+        border-radius: 5px;
+        width: 50%;
+        margin: auto;
+        color: #2c3e50;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    .subscribe-form h2 {
+        margin-bottom: 15px;
+    }
+    .subscribe-form input, .subscribe-form select {
+        width: 80%;
+        padding: 10px;
+        margin: 10px 0;
+        border: none;
+        border-radius: 5px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .subscribe-form button {
+        background: #2c3e50;
+        color: #f39c12;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        font-size: 1.2em;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    .subscribe-form button:hover {
+        background: #1a252f;
+    }
+</style>
+</head>
+<body>
+
+    <div class="subscribe-form">
+        <h2>Subscribe to Our Photography Course</h2>
+        <form>
+            <input type="text" name="name" placeholder="Your Name" required><br>
+            <input type="email" name="email" placeholder="Your Email" required><br>
+            <input type="tel" name="phone" placeholder="Your Phone Number" required><br>
+            <input type="text" name="address" placeholder="Your Address" required><br>
+            <select name="photography-style" required>
+                <option value="" disabled selected>Select Your Preferred Photography Style</option>
+                <option value="landscape">Landscape</option>
+                <option value="portrait">Portrait</option>
+                <option value="night">Night</option>
+                <option value="wildlife">Wildlife</option>
+                <option value="street">Street</option>
+            </select><br>
+            <button type="submit">Subscribe</button>
+        </form>
+    </div>
+
+</body>
+</html>
