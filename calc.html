@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator & Image Grid</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #F4D793;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        .calculator {
+            width: 90%;
+            max-width: 300px;
+            margin: 50px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .calculator input {
+            width: 100%;
+            height: 50px;
+            font-size: 1.5em;
+            text-align: right;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 8px;
+            padding: 10px;
+            background: #e3f2fd;
+            color: #333;
+            box-sizing: border-box;
+        }
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 5px;
+        }
+        .buttons button {
+            height: 50px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            background: #A2BBCF;
+            color: white;
+            transition: background 0.2s, transform 0.1s;
+        }
+        .buttons button:active {
+            background: #799eb4;
+            transform: scale(0.95);
+        }
+        .buttons button:nth-child(1) {
+            background: #f44336;
+        }
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            padding: 20px;
+        }
+        .image-grid div {
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .image-grid img {
+            width: 100%;
+            height: auto;
+            transition: transform 0.3s;
+        }
+        .image-grid img:hover {
+            transform: scale(1.1);
+        }
+        @media (max-width: 400px) {
+            .buttons {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .buttons button {
+                font-size: 1em;
+                height: 45px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <input type="text" id="display" disabled>
+        <div class="buttons">
+            <button>C</button>
+            <button>()</button>
+            <button>%</button>
+            <button>/</button>
+            <button>7</button>
+            <button>8</button>
+            <button>9</button>
+            <button>*</button>
+            <button>4</button>
+            <button>5</button>
+            <button>6</button>
+            <button>-</button>
+            <button>1</button>
+            <button>2</button>
+            <button>3</button>
+            <button>+</button>
+            <button>0</button>
+            <button>.</button>
+            <button>DEL</button>
+            <button>=</button>
+        </div>
+    </div>
+</body>
+</html>
