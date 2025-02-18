@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registration Form</title>
+    <style>
+        body {
+            background-color: pink;
+            text-align: center;
+        }
+        h1 {
+            text-align: center;
+        }
+        .b1 {
+            background-color: green;
+        }
+        .b2 {
+            background-color: red;
+        }
+        .b3 {
+            background-color: green;
+            color: white;
+        }
+        marquee {
+            border: blue 3px solid;
+        }
+        form {
+            display: inline-block;
+            text-align: left;
+        }
+    </style>
+    <script>
+        function validateForm() {
+            let form = document.forms["registrationForm"];
+            let firstname = form["firstname"].value;
+            let lastname = form["lastname"].value;
+            let gender = form["gender"].value;
+            let localad = form["localad"].value;
+            let perAd = form["perAd"].value;
+            let state = form["state"].value;
+            let pincode = form["pincode"].value;
+            let country = form["country"].value;
+            let institute = form["institute"].value;
+            let cgpa = form["cgpa"].value;
+            let mno = form["mno"].value;
+            let email = form["email"].value;
+
+            if (firstname == "" || lastname == "" || gender == "" || localad == "" || perAd == "" || state == "" || pincode == "" || country == "" || institute == "" || cgpa == "" || mno == "" || email == "") {
+                alert("All fields must be filled out");
+                return false;
+            }
+
+            let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email)) {
+                alert("Invalid email format");
+                return false;
+            }
+
+            if (isNaN(mno) || mno.length < 10) {
+                alert("Enter a valid 10-digit contact number");
+                return false;
+            }
+
+            if (isNaN(pincode) || pincode.length < 5) {
+                alert("Enter a valid pincode");
+                return false;
+            }
+
+            if (isNaN(cgpa) || cgpa < 0 || cgpa > 10) {
+                alert("CGPA must be a number between 0 and 10");
+                return false;
+            }
+
+            alert("Form submitted successfully!");
+            return true;
+        }
+
+        function handleReset() {
+            alert("Form has been reset.");
+        }
+    </script>
+</head>
+<body>
+    <h1><u>REGISTRATION FORM</u></h1>
+    <hr>
+    <form name="registrationForm" onsubmit="return validateForm()">
+        <marquee direction="right">
+            <button class="b3">New</button>
+            This is a registration form for summer internship and should be filled with utmost care
+        </marquee><br>
+        
+        <label><b>First Name:</b></label>
+        <input type="text" name="firstname"><br>
+        <br>
+        <label><b>Last Name:</b></label>
+        <input type="text" name="lastname"><br>
+        
+        <label><b>Select your gender:</b></label><br>
+        <input type="radio" name="gender" id="g1" value="Male"><label for="g1">Male</label>
+        <input type="radio" name="gender" id="g2" value="Female"><label for="g2">Female</label>
+        <input type="radio" name="gender" id="g3" value="Other"><label for="g3">Other</label><br>
+        <br>
+        <label><b>Local Address:</b></label>
+        <input type="text" name="localad"><br>
+        <br>
+        <label><b>Permanent Address:</b></label>
+        <input type="text" name="perAd"><br>
+        <br>
+        <label><b>State:</b></label>
+        <input type="text" name="state"><br>
+        <br>
+        <label><b>Pincode:</b></label>
+        <input type="text" name="pincode"><br>
+        <br>
+        <label><b>Country:</b></label>
+        <input type="text" name="country"><br>
+        <br>
+        <label><b>Institute:</b></label>
+        <input type="text" name="institute"><br>
+        <br>
+        <label><b>CGPA:</b></label>
+        <input type="text" name="cgpa"><br>
+        <br>
+        <label><b>Contact No:</b></label>
+        <input type="number" name="mno"><br>
+        <br>
+        <label><b>Email ID:</b></label>
+        <input type="text" name="email"><br>
+        <br>
+        <button class="b1" type="submit">Submit</button>
+        <button class="b2" type="reset" onclick="handleReset()">Reset</button>
+    </form>
+</body>
+</html>
