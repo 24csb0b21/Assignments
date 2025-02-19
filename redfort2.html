@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Red Fort</title>
+    <style>
+        /* CSS Variables */
+        :root {
+            --primary-color: #b30000;
+            --text-color: #333;
+            --bg-color: #f0f0f0;
+            --container-bg: white;
+            --border-radius: 8px;
+        }
+
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            text-align: center;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        /* Sticky Image Section */
+        .sticky-container {
+            position: sticky;
+            top: 20px;
+            max-width: 350px;
+            flex: 1;
+        }
+
+        .sticky-image img {
+            width: 100%;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Content Section */
+        .content {
+            flex: 2;
+            background-color: var(--container-bg);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: var(--primary-color);
+        }
+
+        p {
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* Image Grid */
+        .image-gallery {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .grid {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .image-grid {
+            width: 30%;
+            max-width: 250px;
+            border-radius: var(--border-radius);
+            transition: transform 0.3s ease;
+        }
+
+        /* Image Shapes */
+        .rounded {
+            border-radius: var(--border-radius);
+        }
+
+        .circle {
+            border-radius: 50%;
+        }
+
+        .filter {
+            filter: grayscale(70%) brightness(80%);
+        }
+
+        /* Hover Effects */
+        .image-grid:hover {
+            transform: scale(1.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .sticky-container {
+                max-width: 100%;
+                position: static;
+                text-align: center;
+            }
+
+            .content {
+                width: 100%;
+            }
+
+            .grid {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .image-grid {
+                width: 80%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+   
+    <header>
+        <h1>The Red Fort</h1>
+        <p>Discover the history of one of India's most iconic landmarks</p>
+    </header>
+
+   
+    <div class="container">
+        <!-- Sticky Image -->
+        <div class="sticky-container">
+            <div class="sticky-image">
+                <img src="https://www.shutterstock.com/shutterstock/photos/1199337631/display_1500/stock-photo-red-fort-delhi-india-with-india-flag-flying-high-1199337631.jpg" alt="Red Fort">
+            </div>
+        </div>
+
+       
+        <div class="content">
+            <section class="history">
+                <h2>History of the Red Fort</h2>
+                <p>The Red Fort, or Lal Qila, is a historic fort in Delhi, India. Built by Mughal Emperor Shah Jahan in 1638, it served as the main residence of the Mughal rulers for over 200 years. The fort was named after its massive red sandstone walls.</p>
+                <p>It was originally part of Shah Jahan's new capital, Shahjahanabad, which is now Old Delhi. The fort remained a significant political and cultural center until the British took control in 1857.</p>
+            </section>
+
+            <section class="architecture">
+                <h2>Architecture & Design</h2>
+                <p>The Red Fort showcases a blend of Persian, Timurid, and Indian architectural styles. It features intricate carvings, stunning arches, and grand pavilions.</p>
+                <p>Some of its major structures include:</p>
+                <ul>
+                    <li><b>Lahori Gate:</b> The main entrance, named after its orientation towards Lahore.</li>
+                    <li><b>Diwan-i-Aam:</b> The Hall of Public Audiences, where the emperor addressed the public.</li>
+                    <li><b>Diwan-i-Khas:</b> The Hall of Private Audiences, where the emperor met dignitaries.</li>
+                    <li><b>Moti Masjid:</b> A private mosque for the emperor, built in white marble.</li>
+                </ul>
+            </section>
+
+            <section class="significance">
+                <h2>Significance of the Red Fort</h2>
+                <p>The Red Fort is a UNESCO World Heritage Site and a symbol of India's history and culture. It is the site of India's annual Independence Day celebrations, where the Prime Minister hoists the national flag.</p>
+                <p>Today, the fort houses museums showcasing Mughal artifacts and historical events.</p>
+            </section>
+        </div>
+    </div>
+
+    
+    <section class="image-gallery">
+        <h2>Gallery of the Red Fort</h2>
+        <div class="grid">
+            <img src="https://www.shutterstock.com/shutterstock/photos/1199337631/display_1500/stock-photo-red-fort-delhi-india-with-india-flag-flying-high-1199337631.jpg" class="image-grid rounded">
+            <img src="https://www.shutterstock.com/shutterstock/photos/1199337631/display_1500/stock-photo-red-fort-delhi-india-with-india-flag-flying-high-1199337631.jpg" class="image-grid circle">
+            <img src="https://www.shutterstock.com/shutterstock/photos/1199337631/display_1500/stock-photo-red-fort-delhi-india-with-india-flag-flying-high-1199337631.jpg" class="image-grid filter">
+        </div>
+    </section>
+
+</body>
+</html>
