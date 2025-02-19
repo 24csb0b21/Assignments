@@ -1,0 +1,73 @@
+
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-image:url(https://img.freepik.com/free-vector/blue-curve-background_53876-113112.jpg?semt=ais_hybrid);
+    background-repeat:no-repeat;
+    background-size:cover;
+    color: #333;
+}
+
+h1 {
+    color: #4CAF50;
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+input, button {
+    padding: 12px;
+    font-size: 16px;
+    margin: 12px 0;
+    border-radius: 5px;
+    border: 2px solid #ddd;
+    transition: all 0.3s ease;
+}
+
+input {
+    width: 300px;
+    background-color: #fff;
+}
+
+button {
+    cursor: pointer;
+    background-color: #ff6347;
+    color: white;
+    border: none;
+}
+
+button:hover {
+    background-color: #ff4500; 
+}
+
+input:focus, button:focus {
+    outline: none;
+    border-color: #ffa500; 
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+li {
+    background-color: #ffffff; 
+    margin: 10px 0;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background-color: #e0f7fa; 
+    transition: background-color 0.3s ease;
+}
+
+li:hover {
+    background-color: #80deea;
+    transform: scale(1.05); 
+}
+
+@media (max-width: 600px) {
+    input {
+        width: 100%;
+    }
+}
