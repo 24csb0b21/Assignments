@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Style Change</title>
+  <style>
+  
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      background-color: #f0f8ff;
+      font-family: 'Arial', sans-serif;
+      transition: background-color 0.5s ease;
+    }
+
+   
+    .container {
+      text-align: center;
+      padding: 30px;
+      border-radius: 15px;
+      background-color: #ffffff;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      width: 300px;
+      transition: all 0.5s ease;
+    }
+
+    
+    .box {
+      width: 200px;
+      height: 200px;
+      background-color: #ffcc00;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #333;
+      font-size: 22px;
+      font-weight: bold;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .box:hover {
+      background-color: #ff9966;
+      animation: pulse 0.5s infinite;
+    }
+
+  
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 18px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+
+    button:hover {
+      background-color: #45a049;
+      transform: scale(1.1);
+    }
+
+   
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.1);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    
+    .timer {
+      font-size: 20px;
+      margin-top: 10px;
+      font-weight: bold;
+      color: #ff5722;
+    }
+
+  
+    @keyframes blink {
+      0% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.5;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+  
+    .color-palettes {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 20px;
+    }
+
+    .color-palettes button {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .color-palettes button:hover {
+      transform: scale(1.2);
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="container">
+  
+    <div class="box" id="box">Click me!</div>
+    <button id="changeStyleBtn">Change Style</button>
+    <div id="timer" class="timer">Timer: 0</div>
+
+    
+    <div class="color-palettes">
+      <button style="background-color: #ffcc00;" onclick="setBoxColor('#ffcc00')"></button>
+      <button style="background-color: #66ccff;" onclick="setBoxColor('#66ccff')"></button>
+      <button style="background-color: #ff9966;" onclick="setBoxColor('#ff9966')"></button>
+      <button style="background-color: #ff5722;" onclick="setBoxColor('#ff5722')"></button>
+      <button style="background-color: #4caf50;" onclick="setBoxColor('#4caf50')"></button>
+    </div>
+  </div>
+
+  <script>
+    const box = document.getElementById('box');
+    const changeStyleBtn = document.getElementById('changeStyleBtn');
+    const timerDisplay = document.getElementById('timer');
+    let timerInterval;
+    let countdown = 10;
+
+   
+    function changeStyle() {
+     
+      const randomBgColor = getRandomColor();
+      const randomTextColor = getRandomColor();
+
+      
+      box.style.backgroundColor = randomBgColor;
+      box.style.color = randomTextColor;
+      box.style.fontSize = `${getRandomSize(20, 30)}px`;
+
+     
+      box.classList.add('animated');
+
+     
+      startTimer();
+
+     
+      changeStyleBtn.disabled = true;
+      setTimeout(() => {
+        changeStyleBtn.disabled = false;
+      }, 1000);
+    }
+
+   
+    function getRandomColor() {
+      const letters = '0123456789ABCDEF';
+      let color = '#';
+      for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+      }
+      return color;
+    }
+
+    
+    function getRandomSize(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+   
+    function startTimer() {
+      clearInterval(timerInterval);
+      countdown = 10;
+      timerInterval = setInterval(() => {
+        timerDisplay.textContent = `Timer: ${countdown}`;
+        countdown--;
+
+        if (countdown < 0) {
+          clearInterval(timerInterval);
+          timerDisplay.textContent = "Time's up!";
+          timerDisplay.style.animation = 'blink 1s infinite';
+        }
+      }, 1000);
+    }
+
+ 
+    changeStyleBtn.addEventListener('click', changeStyle);
+
+    
+    function setBoxColor(color) {
+      box.style.backgroundColor = color;
+    }
+  </script>
+
+</body>
+</html>

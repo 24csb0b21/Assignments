@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Countdown Timer with Color Indicator</title>
+  <style>
+   
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f0f0f0;
+      margin: 0;
+      transition: background-color 0.3s ease;
+    }
+
+    .container {
+      text-align: center;
+      padding: 30px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      width: 300px;
+    }
+
+    h1 {
+      margin: 0 0 20px;
+    }
+
+    input[type="number"] {
+      padding: 10px;
+      font-size: 18px;
+      width: 80%;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .timer-display {
+      font-size: 48px;
+      margin: 20px 0;
+      padding: 10px;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      width: 80%;
+      background-color: #f9f9f9;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin: 5px;
+      cursor: pointer;
+      border-radius: 5px;
+      border: none;
+    }
+
+    button.start {
+      background-color: #28a745;
+      color: white;
+    }
+
+    button.pause {
+      background-color: #ffc107;
+      color: black;
+    }
+
+    button.reset {
+      background-color: #dc3545;
+      color: white;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Countdown Timer</h1>
+    <input type="number" id="time-input" placeholder="Enter time in seconds" />
+    <div id="timer" class="timer-display">00:00</div>
+    <button id="start-btn" class="start">Start</button>
+    <button id="pause-btn" class="pause" disabled>Pause</button>
+    <button id="reset-btn" class="reset">Reset</button>
+  </div>
+
+  <script>
+    let timer;
+    let timeLeft = 0;
+    let isRunning = false;
+
+    const timerDisplay = document.getElementById('timer');
+    const timeInput = document.getElementById('time-input');
+    const startBtn = document.getElementById('start-btn');
+    const pauseBtn = document.getElementById('pause-btn');
+    const resetBtn = document.getElementById('reset-btn');
+
+   
+    startBtn.addEventListener('click', () => {
+      if (timeLeft <= 0) return; 
+
+      if (isRunning) {
+        clearInterval(timer);
+        startBtn.textContent = "Resume";
+        pauseBtn.disabled = false;
+      } else {
+        timer = setInterval(updateTimer, 1000);
+        startBtn.textContent = "Pause";
+        pauseBtn.disabled = false;
+      }
+      isRunning = !isRunning;
+    });
+
+   
+    pauseBtn.addEventListener('click', () => {
+      clearInterval(timer);
+      startBtn.textContent = "Resume";
+      isRunning = false;
+    });
+
+    
+    resetBtn.addEventListener('click', () => {
+      clearInterval(timer);
+      timeLeft = 0;
+      timerDisplay.textContent = '00:00';
+      startBtn.textContent = "Start";
+      pauseBtn.disabled = true;
+      isRunning = false;
+      updateBackgroundColor();
+    });
+
+    
+    timeInput.addEventListener('input', () => {
+      timeLeft = parseInt(timeInput.value) || 0;
+      timerDisplay.textContent = formatTime(timeLeft);
+      updateBackgroundColor();
+    });
+
+ 
+    function updateTimer() {
+      if (timeLeft <= 0) {
+        clearInterval(timer);
+        alert("Time's up!");
+        updateBackgroundColor();
+        return;
+      }
+
+      timeLeft--;
+      timerDisplay.textContent = formatTime(timeLeft);
+      updateBackgroundColor(timeLeft);
+    }
+
+   
+    function formatTime(seconds) {
+      const minutes = Math.floor(seconds / 60);
+      const secs = seconds % 60;
+      return `${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+    }
+
+   
+    function updateBackgroundColor() {
+      if (timeLeft > 10) {
+        document.body.style.backgroundColor = 'green';
+      } else if (timeLeft > 5) {
+        document.body.style.backgroundColor = 'yellow';
+      } else if (timeLeft > 0) {
+        document.body.style.backgroundColor = 'red';
+      } else {
+        document.body.style.backgroundColor = '#f0f0f0'; 
+      }
+    }
+  </script>
+
+</body>
+</html>

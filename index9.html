@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Image Gallery</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f7fa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .gallery-container {
+      width: 80%;
+      max-width: 1000px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      gap: 10px;
+    }
+
+    .thumbnail {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      cursor: pointer;
+      border-radius: 10px;
+      transition: transform 0.3s;
+    }
+
+    .thumbnail:hover {
+      transform: scale(1.1);
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 10;
+    }
+
+    .overlay img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 10px;
+    }
+
+    .overlay .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-color: #ff0000;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      font-size: 20px;
+      text-align: center;
+    }
+
+    .overlay .close-btn:hover {
+      background-color: #d32f2f;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="gallery-container">
+    <img src="https://images.pexels.com/photos/459449/pexels-photo-459449.jpeg?cs=srgb&dl=pexels-pixabay-459449.jpg&fm=jpg" alt="Image 1" class="thumbnail" onclick="openImage(this)" />
+    <img src="https://ichef.bbci.co.uk/ace/standard/3840/cpsprodpb/2e18/live/347f4790-fd12-11ef-8c03-7dfdbeeb2526.jpg" alt="Image 2" class="thumbnail" onclick="openImage(this)" />
+    <img src="https://e498rczdjg6.exactdn.com/wp-content/uploads/2020/05/northern-lights-in-Iceland-2-scaled.jpg?strip=all&lossy=1&ssl=1" alt="Image 3" class="thumbnail" onclick="openImage(this)" />
+    <img src="https://www.nitw.ac.in/uba/assets/img/nitw_building.jpg" alt="Image 4" class="thumbnail" onclick="openImage(this)" />
+    <img src="https://static.vecteezy.com/system/resources/thumbnails/049/627/562/small_2x/overhead-view-of-neatly-stacked-colorful-macarons-on-white-plate-against-light-blue-background-for-dessert-and-bakery-concepts-food-and-sweetsgraphy-bright-pastel-aesthetic-trendy-designs-photo.jpg" alt="Image 5" class="thumbnail" onclick="openImage(this)" />
+    <img src="https://akm-img-a-in.tosshub.com/indiatoday/images/story/202210/anirudh-ib3d1ux1llc-unsplash-sixteen_nine.jpg?VersionId=GEPaH83VLAAOE66QE0dwosAw.Lh5kOZw&size=690:388" alt="Image 6" class="thumbnail" onclick="openImage(this)" />
+  </div>
+
+  <div id="imageOverlay" class="overlay">
+    <img id="largeImage" src="" alt="Large Image" />
+    <button class="close-btn" onclick="closeImage()">X</button>
+  </div>
+
+  <script>
+    function openImage(thumbnail) {
+      const largeImage = document.getElementById('largeImage');
+      largeImage.src = thumbnail.src;
+      const overlay = document.getElementById('imageOverlay');
+      overlay.style.display = 'flex';
+    }
+
+    function closeImage() {
+      const overlay = document.getElementById('imageOverlay');
+      overlay.style.display = 'none';
+    }
+  </script>
+
+</body>
+</html>

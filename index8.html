@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Table</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #74ebd5, #9face6);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      width: 80%;
+      padding: 20px;
+      background-color: #ffffff;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #3f51b5;
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: center;
+      border: 1px solid #ddd;
+      transition: all 0.3s;
+    }
+
+    th {
+      background-color: #4caf50;
+      color: white;
+      font-weight: bold;
+    }
+
+    td {
+      background-color: #f9f9f9;
+      color: #333;
+    }
+
+    tr:nth-child(even) td {
+      background-color: #f1f8e9;
+    }
+
+    tr:nth-child(odd) td {
+      background-color: #e1f5fe;
+    }
+
+    td:hover {
+      background-color: #d1c4e9;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #2196f3;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+
+    button:hover {
+      background-color: #1976d2;
+      transform: scale(1.05);
+    }
+
+    .add-row {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .add-row input {
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      width: 150px;
+      transition: border-color 0.3s;
+    }
+
+    .add-row input:focus {
+      border-color: #4caf50;
+    }
+
+    .add-row button {
+      background-color: #ff9800;
+    }
+
+    .add-row button:hover {
+      background-color: #fb8c00;
+    }
+
+    .actions button {
+      background-color: #f44336;
+      font-size: 14px;
+      padding: 5px 10px;
+    }
+
+    .actions button:hover {
+      background-color: #d32f2f;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Interactive Table</h1>
+
+    <div class="add-row">
+      <input type="text" id="nameInput" placeholder="Name" />
+      <input type="text" id="ageInput" placeholder="Age" />
+      <input type="text" id="countryInput" placeholder="Country" />
+      <button onclick="addRow()">Add Row</button>
+    </div>
+
+    <table id="dataTable">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Country</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <script>
+    function addRow() {
+      const name = document.getElementById('nameInput').value;
+      const age = document.getElementById('ageInput').value;
+      const country = document.getElementById('countryInput').value;
+
+      if (name && age && country) {
+        const table = document.getElementById('dataTable').getElementsByTagName('tbody')[0];
+
+        const newRow = table.insertRow();
+        newRow.innerHTML = `
+          <td><input type="text" value="${name}" oninput="updateData(this)" /></td>
+          <td><input type="text" value="${age}" oninput="updateData(this)" /></td>
+          <td><input type="text" value="${country}" oninput="updateData(this)" /></td>
+          <td class="actions"><button onclick="deleteRow(this)">Delete</button></td>
+        `;
+
+        document.getElementById('nameInput').value = '';
+        document.getElementById('ageInput').value = '';
+        document.getElementById('countryInput').value = '';
+      } else {
+        alert("Please fill in all fields");
+      }
+    }
+
+    function updateData(input) {
+      const newValue = input.value;
+      const cell = input.parentElement;
+    }
+
+    function deleteRow(button) {
+      const row = button.parentElement.parentElement;
+      row.remove();
+    }
+  </script>
+
+</body>
+</html>
+

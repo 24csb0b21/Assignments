@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive List Features</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      background: linear-gradient(135deg, #ff7e5f, #feb47b);
+      font-family: 'Arial', sans-serif;
+    }
+
+    .container {
+      text-align: center;
+      padding: 30px;
+      border-radius: 15px;
+      background-color: #ffffff;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      width: 320px;
+    }
+
+    h1 {
+      font-size: 26px;
+      margin-bottom: 20px;
+      color: #ff6347;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      margin: 10px 0;
+      font-size: 18px;
+      background-color: #f6c9b0;
+      padding: 12px;
+      border-radius: 8px;
+      color: #333;
+      transition: all 0.3s ease;
+    }
+
+    li:hover {
+      background-color: #ff9a8b;
+      cursor: pointer;
+      transform: scale(1.05);
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 12px 20px;
+      font-size: 18px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+
+    button:hover {
+      background-color: #45a049;
+      transform: scale(1.05);
+    }
+
+    button:active {
+      background-color: #388e3c;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Interactive List</h1>
+    
+    <ul id="list">
+      <li>Banana</li>
+      <li>Apple</li>
+      <li>Orange</li>
+      <li>Apple</li>
+      <li>Grapes</li>
+      <li>Orange</li>
+    </ul>
+
+    <button onclick="sortList()">Sort Alphabetically</button>
+    <button onclick="filterDuplicates()">Filter Duplicates</button>
+    <button onclick="reverseOrder()">Reverse Order</button>
+  </div>
+
+  <script>
+    const listElement = document.getElementById('list');
+
+    function sortList() {
+      const listItems = Array.from(listElement.getElementsByTagName('li'));
+      listItems.sort((a, b) => a.textContent.localeCompare(b.textContent));
+      
+      listElement.innerHTML = '';
+      listItems.forEach(item => listElement.appendChild(item));
+    }
+
+    function filterDuplicates() {
+      const listItems = Array.from(listElement.getElementsByTagName('li'));
+      const uniqueItems = [...new Set(listItems.map(item => item.textContent))];
+      
+      listElement.innerHTML = '';
+      uniqueItems.forEach(itemText => {
+        const listItem = document.createElement('li');
+        listItem.textContent = itemText;
+        listElement.appendChild(listItem);
+      });
+    }
+
+    function reverseOrder() {
+      const listItems = Array.from(listElement.getElementsByTagName('li'));
+      listItems.reverse();
+      
+      listElement.innerHTML = '';
+      listItems.forEach(item => listElement.appendChild(item));
+    }
+  </script>
+
+</body>
+</html>
+
