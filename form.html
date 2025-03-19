@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visa Requirements</title>
+  <style>
+    body {
+      font-family: 'Georgia', serif;
+      background: linear-gradient(to right, #1a1a1a, #3b3b3b); 
+      color: #f4f4f4; 
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      margin-bottom: 30px;
+      color: #d4af37; 
+      text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    label {
+      font-size: 1.3rem;
+      margin-right: 10px;
+      color: #f4f4f4;
+    }
+
+    select, button {
+      padding: 12px 20px;
+      font-size: 1.1rem;
+      border-radius: 5px;
+      border: 2px solid #d4af37; 
+      margin: 10px 0;
+      background-color: #2e2e2e; 
+      color: #f4f4f4;
+      transition: all 0.3s ease;
+    }
+
+    select {
+      width: 250px;
+    }
+
+    select:hover, button:hover {
+      background-color: #3b3b3b; 
+      border-color: #b68d3f;
+      cursor: pointer;
+    }
+
+    button {
+      background-color: #d4af37;
+      color: #2e2e2e;
+      width: 250px;
+    }
+
+    button:hover {
+      background-color: #b68d3f; 
+      transform: translateY(-3px);
+    }
+
+    .message {
+      font-size: 1.3rem;
+      font-weight: bold;
+      margin-top: 20px;
+      color: #2e2e2e;
+      padding: 15px;
+      background-color: #f4f4f4; 
+      border: 2px solid #d4af37; 
+      border-radius: 5px;
+      width: 100%;
+      max-width: 300px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .container {
+      background-color: #2e2e2e;
+      border-radius: 10px;
+      padding: 40px 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      text-align: center;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .dropdown-container {
+      margin-bottom: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 30px 20px;
+      }
+
+      select, button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Visa Requirements</h1>
+    
+    <div class="dropdown-container">
+      <label for="country">Choose a country:</label>
+      <select id="country">
+        <option value="">Select a country</option>
+        <option value="USA">United States</option>
+        <option value="Canada">Canada</option>
+        <option value="India">India</option>
+        <option value="UK">United Kingdom</option>
+        <option value="Australia">Australia</option>
+      </select>
+    </div>
+
+    <button onclick="checkVisaRequirements()">Check Visa</button>
+
+    <div id="visaMessage" class="message"></div>
+  </div>
+
+  <script>
+    function checkVisaRequirements() {
+      const country = document.getElementById("country").value;
+      const messageDiv = document.getElementById("visaMessage");
+      
+      switch(country) {
+        case "USA":
+          messageDiv.textContent = "Visa required for most applicants.";
+          messageDiv.style.backgroundColor = "#ffebcc"; 
+          break;
+        case "Canada":
+          messageDiv.textContent = "Visa required unless you have an eTA.";
+          messageDiv.style.backgroundColor = "#e2f0cb"; 
+          break;
+        case "India":
+          messageDiv.textContent = "Visa required before travel.";
+          messageDiv.style.backgroundColor = "#f3f4f7"; 
+          break;
+        case "UK":
+          messageDiv.textContent = "Visa depends on the duration of stay.";
+          messageDiv.style.backgroundColor = "#d1e7f0"; 
+          break;
+        case "Australia":
+          messageDiv.textContent = "eVisa available for eligible travelers.";
+          messageDiv.style.backgroundColor = "#fff0e6"; 
+          break;
+        default:
+          messageDiv.textContent = "Please select a country.";
+          messageDiv.style.backgroundColor = "#f4f4f4"; 
+      }
+    }
+  </script>
+</body>
+</html>
