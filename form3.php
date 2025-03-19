@@ -87,61 +87,45 @@
 
   <div class="form-container">
     <h1>Visa Application</h1>
-
-   
-    <form action="" method="POST">
-     
+    <form id="visaForm">
       <label for="name">Enter your full name:</label>
-      <input type="text" id="name" name="name" required value="<?= isset($_POST['name']) ? $_POST['name'] : ''; ?>">
+      <input type="text" id="name" name="name" required>
 
-     
       <label for="passport">Passport Number:</label>
-      <input type="text" id="passport" name="passport" required value="<?= isset($_POST['passport']) ? $_POST['passport'] : ''; ?>">
+      <input type="text" id="passport" name="passport" required>
 
-     
       <label for="country">Select your country:</label>
       <select id="country" name="country" required>
         <option value="">Select a country</option>
-        <option value="USA" <?= (isset($_POST['country']) && $_POST['country'] == 'USA') ? 'selected' : ''; ?>>United States</option>
-        <option value="Canada" <?= (isset($_POST['country']) && $_POST['country'] == 'Canada') ? 'selected' : ''; ?>>Canada</option>
-        <option value="India" <?= (isset($_POST['country']) && $_POST['country'] == 'India') ? 'selected' : ''; ?>>India</option>
-        <option value="UK" <?= (isset($_POST['country']) && $_POST['country'] == 'UK') ? 'selected' : ''; ?>>United Kingdom</option>
-        <option value="Australia" <?= (isset($_POST['country']) && $_POST['country'] == 'Australia') ? 'selected' : ''; ?>>Australia</option>
+        <option value="USA">United States</option>
+        <option value="Canada">Canada</option>
+        <option value="India">India</option>
+        <option value="UK">United Kingdom</option>
+        <option value="Australia">Australia</option>
       </select>
-
       
       <button type="submit">Apply for Visa</button>
     </form>
-
-    
-    <?php
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-       
-        $name = trim($_POST['name']);
-        $passport = trim($_POST['passport']);
-        $country = $_POST['country'];
-
-      
-        $message = '';
-        $messageClass = '';
-
-      
-        if (empty($name) || empty($passport) || empty($country)) {
-            $message = 'All fields are required!';
-            $messageClass = 'error';
-        } elseif (strlen($passport) < 8 || strlen($passport) > 10) {
-            $message = 'Invalid passport number!';
-            $messageClass = 'error';
-        } else {
-            $message = 'Visa application submitted successfully!';
-            $messageClass = 'success';
-        }
-
-     
-        echo "<div class='$messageClass'>$message</div>";
-    }
-    ?>
+    <div id="message"></div>
   </div>
 
+  <script>
+    document.getElementById('visaForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      
+      let name = document.getElementById('name').value.trim();
+      let passport = document.getElementById('passport').value.trim();
+      let country = document.getElementById('country').value;
+      let messageDiv = document.getElementById('message');
+
+      if (name === '' || passport === '' || country === '') {
+        messageDiv.innerHTML = '<div class="error">All fields are required!</div>';
+      } else if (passport.length < 8 || passport.length > 10) {
+        messageDiv.innerHTML = '<div class="error">Invalid passport number!</div>';
+      } else {
+        messageDiv.innerHTML = '<div class="success">Visa application submitted successfully!</div>';
+      }
+    });
+  </script>
 </body>
 </html>
