@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Alarm Clock</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #1c1c1c;
+            color: white;
+            font-family: 'Arial', sans-serif;
+            transition: background 0.5s, color 0.5s;
+        }
+
+        .clock-container {
+            text-align: center;
+            background: #333;
+            border-radius: 15px;
+            padding: 20px;
+            width: 300px;
+            box-shadow: 0 0 20px #00ffea;
+            transition: background 0.5s;
+        }
+
+        .clock {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        #hours, #minutes, #seconds {
+            display: inline-block;
+        }
+
+        #colon, #colon2 {
+            animation: blink-colon 1s infinite;
+        }
+
+        #ampm {
+            font-size: 1rem;
+            margin-left: 10px;
+        }
+
+        #date {
+            margin-top: 5px;
+            font-size: 1rem;
+        }
+
+        @keyframes blink-colon {
+            50% {
+                opacity: 0;
+            }
+        }
+
+        .controls button, .stopwatch-controls button, .theme-buttons button {
+            margin: 5px;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #00ffea;
+            color: #000;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .progress-bar-container {
+            margin: 10px 0;
+            background: #555;
+            border-radius: 10px;
+            height: 10px;
+            width: 100%;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: #00ffea;
+            border-radius: 10px;
+        }
+
+        .stopwatch {
+            margin: 10px 0;
+            font-size: 1.5rem;
+        }
+
+        .clock.shake {
+            animation: shake 0.5s;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            50% { transform: translateX(5px); }
+            75% { transform: translateX(-5px);}
+        }
+
+        .fade-in-out {
+            animation: fadeInOut 3s infinite;
+        }
+
+        @keyframes fadeInOut {
+            0%, 100% { opacity:0;}
+            50% { opacity: 1; }
+        }
+
+        .theme-buttons {
+            margin: 10px 0;
+        }
+
+        .light-theme {
+            background: #f5f5f5;
+            color: #333;
+        }
+
+        .light-theme .clock-container {
+            background: #fff;
+            box-shadow: 0 0 20px #aaa;
+        }
+
+        .neon-theme .clock-container {
+            box-shadow: 0 0 20px #ff00ff;
+        }
+    </style>
+</head>
+<body>
+    <div class="clock-container">
+        <div class="clock">
+            <span id="hours">00</span><span id="colon">:</span><span id="minutes">00</span><span id="colon2">:</span><span id="seconds">00</span>
+            <span id="ampm">AM</span>
+            <div id="date"></div>
+        </div>
+        <div class="controls">
+            <button id="set-alarm">Set Alarm</button>
+            <button id="stop-alarm">Stop Alarm</button>
+            <button id="snooze">Snooze</button>
+            <button id="set-countdown">Set Countdown</button>
+        </div>
+        <div class="progress-bar-container">
+            <div class="progress-bar" id="progress"></div>
+        </div>
+        <div class="stopwatch">
+            <span id="sw-minutes">00</span>:<span id="sw-seconds">00</span>:<span id="sw-milliseconds">00</span>
+        </div>
+        <div class="stopwatch-controls">
+            <button id="start-stopwatch">Start</button>
+            <button id="pause-stopwatch">Pause</button>
+            <button id="reset-stopwatch">Reset</button>
+        </div>
+        <div class="theme-buttons">
+            <button id="light-theme">Light Theme</button>
+            <button id="dark-theme">Dark Theme</button>
+            <button id="neon-theme">Neon Theme</button>
+        </div>
+    </div>
+
+    <script>
+        const hoursEl = document.getElementById("hours");
+        const minutesEl = document.getElementById("minutes");
+        const secondsEl = document.getElementById("seconds");
+        const ampmEl = document.getElementById("ampm");
+        const dateEl = document.getElementById("date");
+        const progressBar = document.getElementById("progress");
+
+        const stopwatchMinutesEl = document.getElementById("sw-minutes");
+        const stopwatchSecondsEl = document.getElementById("sw-seconds");
+        const stopwatchMillisecondsEl = document.getElementById("sw-milliseconds");
+
+        let alarmArray = [];
+        let countdownTime = null;
+        let countdownInterval = null;
+        let countdownInput = null;
+        let alarmTimeout = null;
+
+        let stopwatchInterval;
+        let stopwatchRunning = false;
+        let stopwatchMinutes = 0;
+        let stopwatchSeconds = 0;
+        let stopwatchMilliseconds = 0;
+
+        function updateClock() {
+            const now = new Date();
+            const hours = now.getHours();
+            const minutes = now.getMinutes();
+            const seconds = now.getSeconds();
+
+            hoursEl.innerText = String(hours % 12 || 12).padStart(2, "0");
+            minutesEl.innerText = String(minutes).padStart(2, "0");
+            secondsEl.innerText = String(seconds).padStart(2, "0");
+            ampmEl.innerText = hours >= 12 ? "PM" : "AM";
+            dateEl.innerText = now.toDateString();
+        }
+
+        function setAlarm() {
+            const alarmInput = prompt("Enter alarm time in HH:MM format (24-hour)");
+            if (alarmInput) {
+                const alarmObj = { time: alarmInput, active: true };
+                alarmArray.push(alarmObj);
+                alert(`Alarm set for ${alarmInput}`);
+            }
+        }
+
+        function checkAlarms() {
+            const now = new Date();
+            const currentTime = `${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`;
+
+            alarmArray.forEach(alarm => {
+                if (alarm.active && alarm.time === currentTime) {
+                    document.querySelector(".clock").classList.add("shake");
+                    alert("Alarm ringing!");
+                    alarm.active = false;
+                }
+            });
+        }
+
+        function stopAlarm() {
+            document.querySelector(".clock").classList.remove("shake");
+            alarmArray = alarmArray.filter(alarm => alarm.active);
+        }
+
+        function snoozeAlarm() {
+            const snoozeTime = new Date(new Date().getTime() + 5 * 60000);
+            const snoozeFormatted = `${String(snoozeTime.getHours()).padStart(2, "0")}:${String(snoozeTime.getMinutes()).padStart(2, "0")}`;
+            alarmArray.push({ time: snoozeFormatted, active: true });
+            stopAlarm();
+            alert("Snooze set for 5 minutes later.");
+        }
+
+        function setCountdown() {
+            countdownInput = prompt("Enter countdown time in seconds");
+            if (countdownInput && !isNaN(countdownInput)) {
+                countdownTime = parseInt(countdownInput);
+                progressBar.style.width = `100%`;
+                if (countdownInterval) clearInterval(countdownInterval);
+                countdownInterval = setInterval(updateCountdown, 1000);
+            }
+        }
+
+        function updateCountdown() {
+            if (countdownTime <= 0) {
+                clearInterval(countdownInterval);
+                progressBar.style.width = "0%";
+                alert("Time's up!");
+                return;
+            }
+
+            countdownTime--;
+            const progressPercentage = (countdownTime / countdownInput) * 100;
+            progressBar.style.width = `${progressPercentage}%`;
+        }
+
+        function updateStopwatch() {
+            stopwatchMilliseconds++;
+            if (stopwatchMilliseconds === 100) {
+                stopwatchMilliseconds = 0;
+                stopwatchSeconds++;
+            }
+            if (stopwatchSeconds === 60) {
+                stopwatchSeconds = 0;
+                stopwatchMinutes++;
+            }
+            stopwatchMinutesEl.innerText = String(stopwatchMinutes).padStart(2, "0");
+            stopwatchSecondsEl.innerText = String(stopwatchSeconds).padStart(2, "0");
+            stopwatchMillisecondsEl.innerText = String(stopwatchMilliseconds).padStart(2, "0");
+        }
+
+        document.getElementById("start-stopwatch").addEventListener("click", () => {
+            if (!stopwatchRunning) {
+                stopwatchInterval = setInterval(updateStopwatch, 10);
+                stopwatchRunning = true;
+            }
+        });
+
+        document.getElementById("pause-stopwatch").addEventListener("click", () => {
+            clearInterval(stopwatchInterval);
+            stopwatchRunning = false;
+        });
+
+        document.getElementById("reset-stopwatch").addEventListener("click", () => {
+            clearInterval(stopwatchInterval);
+            stopwatchRunning = false;
+            stopwatchMilliseconds = stopwatchSeconds = stopwatchMinutes = 0;
+            stopwatchMinutesEl.innerText = "00";
+            stopwatchSecondsEl.innerText = "00";
+            stopwatchMillisecondsEl.innerText = "00";
+        });
+
+        function applyTheme(theme) {
+            document.body.classList.remove("light-theme", "dark-theme", "neon-theme");
+            document.body.classList.add(`${theme}-theme`);
+        }
+
+        document.getElementById("set-alarm").addEventListener("click", setAlarm);
+        document.getElementById("stop-alarm").addEventListener("click", stopAlarm);
+        document.getElementById("snooze").addEventListener("click", snoozeAlarm);
+        document.getElementById("set-countdown").addEventListener("click", setCountdown);
+
+        document.getElementById("light-theme").addEventListener("click", () => applyTheme("light"));
+        document.getElementById("dark-theme").addEventListener("click", () => applyTheme("dark"));
+        document.getElementById("neon-theme").addEventListener("click", () => applyTheme("neon"));
+
+        setInterval(() => {
+            updateClock();
+            checkAlarms();
+        }, 1000);
+
+        updateClock();
+    </script>
+</body>
+</html>
